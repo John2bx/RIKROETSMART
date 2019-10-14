@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { Store } from '@ngrx/store';
+import { State } from 'app/store';
+import * as AuthActions from '../../../../store/actions/auth.actions';
 
 @Component({
     selector     : 'login-2',
@@ -23,7 +26,8 @@ export class Login2Component implements OnInit
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        public store: Store<State>
     )
     {
         // Configure the layout
@@ -58,5 +62,9 @@ export class Login2Component implements OnInit
             email   : ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
         });
+    }
+    public login(): any {
+     console.log('make the magic happen');
+     this.store.dispatch(AuthActions.logingIn(this.loginForm.value));   
     }
 }

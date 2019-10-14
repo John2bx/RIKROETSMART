@@ -20,6 +20,11 @@ import { FakeDbService } from 'app/fake-db/fake-db.service';
 import { AppComponent } from 'app/app.component';
 import { AppStoreModule } from 'app/store/store.module';
 import { LayoutModule } from 'app/layout/layout.module';
+import { MailboxService } from './store/services/mailbox.service';
+import { EventsService } from './store/services/events.service';
+import { AuthService } from './store/services/auth.service';
+import { UserService } from './store/services/users.service';
+import { UserStorageService } from './store/services/userstorage.service';
 
 const appRoutes: Routes = [
     {
@@ -44,7 +49,7 @@ const appRoutes: Routes = [
     // },
     {
         path      : '**',
-        redirectTo: 'apps/mail-ngrx'
+        redirectTo: '/pages/auth/login-2'
     }
 ];
 
@@ -82,6 +87,16 @@ const appRoutes: Routes = [
         LayoutModule,
         AppStoreModule
     ],
+   
+    providers: [
+            MailboxService,
+            EventsService,
+            AuthService,
+            UserService,
+            UserStorageService,
+          ],
+    
+
     bootstrap   : [
         AppComponent
     ]
